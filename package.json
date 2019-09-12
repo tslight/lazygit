@@ -1,5 +1,5 @@
 {
-  "name": "lazygit",
+  "name": "lazygitlab",
   "version": "0.0.1",
   "description": "Get slack & be a lazy git...",
   "main": "lazygitlab.js",
