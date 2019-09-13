@@ -31,6 +31,9 @@ return gl.get('/api/v4/groups\?per_page\=999')
       return gl.get('/api/v4/groups/${id}/projects\?per_page\=999')
 	.then((prjs) => {
 	  console.log(prjs);
+	})
+	.catch((err) => {
+	  throw err;
 	});
     }
   });
