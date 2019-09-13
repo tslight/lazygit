@@ -20,20 +20,24 @@ let gids = [];
 let projects = [];
 return gl.get('/api/v4/groups\?per_page\=999')
   .then((groups) => {
-    function getId(group) {
-      gids.push(group.id);
-    }
-    return groups.data.map(getId);
+    return groups.data.map((g) => {
+      return gids.push(g.id);
+    });
   })
   .then(() => {
-    console.log(gids);
-    for (let id of gids) {
-      return gl.get('/api/v4/groups/${id}/projects\?per_page\=999')
-	.then((prjs) => {
-	  console.log(prjs);
+    return gids.map((id) => {
+      return gl.get(`/api/v4/groups/${id}/projects\?per_page\=999`)
+	.then((repos) => {
+	  return repos.data.map((r) => {
+	    console.log(r.ssh_url_to_repo)
+	    return projects.push(r.ssh_url_to_repo)
+	  })
 	})
 	.catch((err) => {
 	  throw err;
 	});
-    }
-  });
+    })
+  })
+  .then(() => {
+    console.log(projects);
+  })
