@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 'use strict';
-const Promise = require('bluebird');
-const rp      = require('request-promise');
-const lodash  = require('lodash');
 const cmd     = require('node-cmd');
 const fs      = require('fs');
-const homedir = require('os').homedir();
+const home    = require('os').homedir();
+const lodash  = require('lodash');
+const path    = require('path');
+const Promise = require('bluebird');
+const rp      = require('request-promise');
 
 const nc  = "\x1b[0m"
 const br  = "\x1b[1m"
@@ -20,12 +21,21 @@ const wht = "\x1b[1m\x1b[37m"
 const config = require('./config');
 const token  = config.token;
 
+function expandPath(filepath) {
+  if (filepath[0] === '~') {
+    return path.join(home, filepath.slice(1));
+  }
+  return filepath;
+}
+
 if (process.argv[2] == undefined) {
   if (config.dest == undefined) {
-    var dest = `${homedir}/src`;
+    var dest = `${home}/src`;
   } else {
-    var dest = config.dest;
+    var dest = expandPath(config.dest);
   }
+} else {
+  var dest = (process.argv[2]);
 }
 
 const host  = 'https://www.gitlab.com';
@@ -35,8 +45,6 @@ const group = process.argv[3];
 if (fs.existsSync(dest) == false) {
   fs.mkdirSync(dest, { recursive: true });
 }
-
-console.log(`Cloning or updating ${host} repos to ${dest}...`);
 
 rp.get('https://www.gitlab.com/api/v4/groups\?per_page\=999', {
   json: true,
