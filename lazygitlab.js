@@ -18,9 +18,6 @@ const mag = "\x1b[1m\x1b[35m"
 const cyn = "\x1b[1m\x1b[36m"
 const wht = "\x1b[1m\x1b[37m"
 
-const config = require('./config');
-const token  = config.token;
-
 function expandPath(filepath) {
   if (filepath[0] === '~') {
     return path.join(home, filepath.slice(1));
@@ -29,17 +26,34 @@ function expandPath(filepath) {
 }
 
 if (process.argv[2] == undefined) {
+  try {
+    var config = require('./config');
+    var token  = config.token;
+    if(config.token == undefined) {
+      console.log("No API token provided. Aborting.")
+      process.exit(1);
+    }
+  } catch {
+    console.log("Cannot find config file. Aborting.")
+    process.exit(1);
+  }
+} else {
+  var token = (process.argv[2]);
+}
+
+if (process.argv[3] == undefined) {
   if (config.dest == undefined) {
-    var dest = `${home}/src`;
+    console.log("No directory argument. Aborting.")
+    process.exit(1);
   } else {
     var dest = expandPath(config.dest);
   }
 } else {
-  var dest = (process.argv[2]);
+  var dest = (process.argv[3]);
 }
 
 const host  = 'https://www.gitlab.com';
-const group = process.argv[3];
+const group = process.argv[4];
 
 //https://stackoverflow.com/a/40686853
 if (fs.existsSync(dest) == false) {
