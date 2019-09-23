@@ -23,7 +23,13 @@ Then run `npm install` in the project root, to download dependancies, and `npm
 link` to install as CLI app called `lazygitlab`
 
 Alternatively you can pass command line arguments to overwrite the default
-configuration, and/or specify groups.
+configuration.
+
+You can also pass a the `--group` argument, and `lazygitlab` will only download
+the repositories under that group (recursively).
+
+The `--status` flag will run `git status` on the locally downloaded repos, so
+you can see what you've changed locally since you're last commit.
 
 ``` shell
 Options:
