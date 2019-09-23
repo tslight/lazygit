@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 const axios     = require('axios');
 const fs        = require('fs');
-const git       = require('./modules/git');
-const args      = require('./modules/args');
+const git       = require('./lib/git');
+const args      = require('./lib/args');
 const token     = args.chkToken();
 const dest      = args.chkDest();
 const host      = 'https://www.gitlab.com';
