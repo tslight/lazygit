@@ -19,12 +19,11 @@ git.pull = (path) => {
       } else {
 	console.log(`${yel}${path}\n${nc} ${data}`.trim());
       }
-    }
-    if(stderr) {
+    } else if(stderr) {
       if(stderr.includes('no such ref was fetched')) {
 	console.log(`${grn}${path}:${nc} Nothing to see here.`.trim());
       } else {
-	console.log(`${red}${path}\n${nc} ${err}`.trim());
+	console.log(`${red}${path}\n${nc} ${stderr}`.trim());
       }
     }
   });
