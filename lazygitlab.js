@@ -33,7 +33,7 @@ if (process.argv[2] == undefined) {
       console.log("No API token provided. Aborting.")
       process.exit(1);
     }
-  } catch {
+  } catch(e) {
     console.log("Cannot find config file. Aborting.")
     process.exit(1);
   }
