@@ -23,6 +23,11 @@ const args  = yargs
 	description: 'Increase verbosity.',
 	type: 'boolean',
       })
+      .option('status', {
+	alias: 's',
+	description: 'View local status.',
+	type: 'boolean',
+      })
       .help()
       .alias('help', 'h')
       .argv;

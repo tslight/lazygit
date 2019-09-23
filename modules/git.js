@@ -35,4 +35,14 @@ git.clone = (url, path) => {
   });
 };
 
+git.status = (path) => {
+  cmd.get(`git -C ${path} status -s`, (err, data, stderr) => {
+    if (data) {
+      console.log(`${yel}${path}${nc}\n${data.trimRight()}${nc}`);
+    } else {
+      console.log(`${grn}${path}${nc}: Nothing to commit.${nc}`);
+    }
+  });
+};
+
 module.exports = git;

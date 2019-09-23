@@ -11,9 +11,13 @@ const gitlabApi = axios.create({
   headers: {'PRIVATE-TOKEN': "jvBukuh6y8xTd6MyLwFz"}
 });
 
-runGit = (url) => {
+runGit = (url, status) => {
   let path = dest + '/' + url.substring(url.indexOf(':') + 1);
   path = path.replace('.git', '').replace('//', '/');
+  if (status) {
+    git.status(path);
+    return;
+  }
   (fs.existsSync(path) ? git.pull(path) : git.clone(url, path, args.verbose));
 };
 
@@ -49,18 +53,18 @@ getGroups = (name) => {
   }
 };
 
-lazygit = (group_name) => {
+lazygit = (group_name, status) => {
   return getGroups(group_name)
     .then((gids) => {
       return gids.map((id) => {
 	return getUrls(id)
 	  .then((urls) => {
 	    return urls.map((url) => {
-	      return runGit(url);
+	      return runGit(url, status);
 	    });
 	  });
       });
     });
 };
 
-return lazygit(args.group);
+return lazygit(args.group, args.status);

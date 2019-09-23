@@ -22,7 +22,16 @@ value in `config.json`.
 Then run `npm install` in the project root, to download dependancies, and `npm
 link` to install as CLI app called `lazygitlab`
 
-If you want to overwrite the default destination of `~/src` or the one you
-specified in `config.json`, simply append it to the command like so:
+Alternatively you can pass command line arguments to overwrite the default
+configuration, and/or specify groups.
 
-`lazygitlab /path/to/some/other/repo/location`
+``` shell
+Options:
+  --version          Show version number                               [boolean]
+  --token, -t        Gitlab API token                                   [string]
+  --destination, -d  Destination directory                              [string]
+  --group, -g        Group to download.                                 [string]
+  --verbose, -v      Increase verbosity.                               [boolean]
+  --status, -s       View local status.                                [boolean]
+  --help, -h         Show help                                         [boolean]
+```
