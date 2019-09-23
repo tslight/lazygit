@@ -18,7 +18,7 @@ runGit = (url, status) => {
     git.status(path);
     return;
   }
-  (fs.existsSync(path) ? git.pull(path) : git.clone(url, path, args.verbose));
+  (fs.existsSync(path) ? git.pull(path) : git.clone(url, path));
 };
 
 getUrls = (id) => {
