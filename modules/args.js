@@ -1,7 +1,31 @@
-const args = {};
-const fs   = require('fs');
-const home = require('os').homedir();
-const path = require('path');
+const fs    = require('fs');
+const home  = require('os').homedir();
+const path  = require('path');
+const yargs = require('yargs');
+const args  = yargs
+      .option('token', {
+	alias: 't',
+	description: 'Gitlab API token',
+	type: 'string',
+      })
+      .option('destination', {
+	alias: 'd',
+	description: 'Destination directory',
+	type: 'string',
+      })
+      .option('group', {
+	alias: 'g',
+	description: 'Group to download.',
+	type: 'string',
+      })
+      .option('verbose', {
+	alias: 'v',
+	description: 'Increase verbosity.',
+	type: 'boolean',
+      })
+      .help()
+      .alias('help', 'h')
+      .argv;
 
 function expandPath(filepath) {
   if (filepath[0] === '~') {
@@ -17,8 +41,10 @@ function chkDir(dir) {
   }
 }
 
-args.chkToken = (arg) => {
-  if (arg == undefined) {
+args.chkToken = () => {
+  if (args.token) {
+    return args.token;
+  } else {
     try {
       var config = require('../config');
       if(config.token == undefined) {
@@ -30,13 +56,14 @@ args.chkToken = (arg) => {
       console.log("Cannot find config file. Aborting.");
       process.exit(1);
     }
-  } else {
-    return arg;
   }
 };
 
-args.chkDest = (arg) => {
-  if (arg == undefined) {
+args.chkDest = () => {
+  if (args.destination) {
+    chkDir(args.destination);
+    return expandPath(args.destination);
+  } else {
     try {
       var config = require('../config');
       if(config.dest == undefined) {
@@ -49,14 +76,7 @@ args.chkDest = (arg) => {
       console.log("Cannot find config file. Aborting.");
       process.exit(1);
     }
-  } else {
-    chkDir(arg);
-    return expandPath(arg);
   }
-};
-
-args.chkGroup = (arg) => {
-  return arg;
 };
 
 module.exports = args;
