@@ -42,6 +42,9 @@ function expandPath(filepath) {
 function chkDir(dir) {
   //https://stackove rflow.com/a/40686853
   if (fs.existsSync(dir) == false) {
+    if (args.verbose) {
+      console.log(`${dir} doesn't exist. Creating...`);
+    }
     fs.mkdirSync(dir, { recursive: true });
   }
 }
@@ -66,7 +69,7 @@ args.chkToken = () => {
 
 args.chkDest = () => {
   if (args.destination) {
-    chkDir(args.destination);
+    chkDir(expandPath(args.destination));
     return expandPath(args.destination);
   } else {
     try {
@@ -75,7 +78,7 @@ args.chkDest = () => {
 	console.log("No destination provided. Aborting.");
 	process.exit(1);
       }
-      chkDir(config.dest);
+      chkDir(expandPath(config.dest));
       return expandPath(config.dest);
     } catch(e) {
       console.log("Cannot find config file. Aborting.");

@@ -17,7 +17,7 @@ git.pull = (path) => {
     if(data) {
       if (data.includes('Already up to date')) {
 	if (args.verbose) {
-	  console.log(`${grn}${path}:${nc} ${data}`.trim());
+	  console.log(`${grn}${path}:${cyn} ${data.trim()}${nc}`);
 	}
       } else {
 	console.log(`${yel}${path}\n${nc} ${data}`.trim());
@@ -25,7 +25,7 @@ git.pull = (path) => {
     } else if(stderr) {
       if(stderr.includes('no such ref was fetched')) {
 	if (args.verbose) {
-	  console.log(`${grn}${path}:${nc} Nothing to see here.`.trim());
+	  console.log(`${grn}${path}:${mag} Nothing to see here.${nc}`);
 	}
       } else {
 	console.log(`${red}${path}\n${nc} ${stderr}`.trim());
