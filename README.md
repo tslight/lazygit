@@ -27,11 +27,11 @@ configuration, and/or specify groups.
 
 ``` shell
 Options:
-  --version          Show version number                               [boolean]
-  --token, -t        Gitlab API token                                   [string]
-  --destination, -d  Destination directory                              [string]
-  --group, -g        Group to download.                                 [string]
-  --verbose, -v      Increase verbosity.                               [boolean]
-  --status, -s       View local status.                                [boolean]
-  --help, -h         Show help                                         [boolean]
+  --version          Show version number    \[boolean\]
+  --token, -t        Gitlab API token        \[string\]
+  --destination, -d  Destination directory   \[string\]
+  --group, -g        Group to download       \[string\]
+  --verbose, -v      Increase verbosity     \[boolean\]
+  --status, -s       View local status      \[boolean\]
+  --help, -h         Show help              \[boolean\]
 ```
