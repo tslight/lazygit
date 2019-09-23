@@ -55,13 +55,21 @@ getGroups = () => {
 };
 
 nameToGroupID = (name) => {
-
-}
+  return gl.get('/api/v4/groups\?per_page\=999')
+    .then((groups) => {
+      return groups.data.filter((g) => {
+	console.log(`${g.name} == ${name}`);
+	return g.name == name;
+      });
+    })
+    .then((group) => {
+      return group[0].id;
+    });
+};
 
 cloneAll = () => {
   return getGroups()
     .then((gids) => {
-      // console.log(gids);
       return gids.map((id) => {
 	return getUrls(id)
 	  .then((urls) => {
@@ -73,8 +81,22 @@ cloneAll = () => {
     });
 };
 
+cloneGroup = (group) => {
+  return nameToGroupID(group)
+    .then((id) => {
+      console.log(id);
+      return getUrls(id)
+	.then((urls) => {
+	  return urls.map((url) => {
+	    return cloneRepo(url);
+	  });
+	});
+    });
+};
+
 if (group == undefined) {
+  console.log(`here`);
   return cloneAll();
 } else {
-
+  return cloneGroup(group);
 }
