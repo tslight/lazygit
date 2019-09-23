@@ -1,5 +1,6 @@
 const cmd   = require('node-cmd');
-const git = {};
+const args  = require('./args');
+const git   = {};
 
 const nc  = "\x1b[0m";
 const br  = "\x1b[1m";
@@ -15,13 +16,17 @@ git.pull = (path) => {
   cmd.get(`git -C ${path} pull`, (err, data, stderr) => {
     if(data) {
       if (data.includes('Already up to date')) {
-	console.log(`${grn}${path}:${nc} ${data}`.trim());
+	if (args.verbose) {
+	  console.log(`${grn}${path}:${nc} ${data}`.trim());
+	}
       } else {
 	console.log(`${yel}${path}\n${nc} ${data}`.trim());
       }
     } else if(stderr) {
       if(stderr.includes('no such ref was fetched')) {
-	console.log(`${grn}${path}:${nc} Nothing to see here.`.trim());
+	if (args.verbose) {
+	  console.log(`${grn}${path}:${nc} Nothing to see here.`.trim());
+	}
       } else {
 	console.log(`${red}${path}\n${nc} ${stderr}`.trim());
       }
@@ -40,7 +45,9 @@ git.status = (path) => {
     if (data) {
       console.log(`${yel}${path}${nc}\n${data.trimRight()}${nc}`);
     } else {
-      console.log(`${grn}${path}${nc}: Nothing to commit.${nc}`);
+      if (args.verbose) {
+	console.log(`${grn}${path}${nc}: Nothing to commit.${nc}`);
+      }
     }
   });
 };

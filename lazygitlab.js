@@ -11,10 +11,10 @@ const gitlabApi = axios.create({
   headers: {'PRIVATE-TOKEN': "jvBukuh6y8xTd6MyLwFz"}
 });
 
-runGit = (url, status) => {
+runGit = (url) => {
   let path = dest + '/' + url.substring(url.indexOf(':') + 1);
   path = path.replace('.git', '').replace('//', '/');
-  if (status) {
+  if (args.status) {
     git.status(path);
     return;
   }
@@ -30,12 +30,12 @@ getUrls = (id) => {
     });
 };
 
-getGroups = (name) => {
-  if (name) {
+getGroups = () => {
+  if (args.group) {
     return gitlabApi.get('/api/v4/groups\?per_page\=999')
       .then((groups) => {
-	return groups.data.filter((g) => {
-	  return g.full_path.startsWith(name);
+	return groups.data.filter((group) => {
+	  return group.full_path.startsWith(args.group);
 	});
       })
       .then((groups) => {
@@ -53,18 +53,18 @@ getGroups = (name) => {
   }
 };
 
-lazygit = (group_name, status) => {
-  return getGroups(group_name)
+lazygit = () => {
+  return getGroups()
     .then((gids) => {
       return gids.map((id) => {
 	return getUrls(id)
 	  .then((urls) => {
 	    return urls.map((url) => {
-	      return runGit(url, status);
+	      return runGit(url);
 	    });
 	  });
       });
     });
 };
 
-return lazygit(args.group, args.status);
+return lazygit();
