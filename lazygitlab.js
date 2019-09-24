@@ -20,6 +20,19 @@ runGit = (url) => {
   }
 };
 
+// lazygit = () => {
+//   return gitlab.getGroups()
+//     .then((gids) => {
+//       return gids.map((id) => {
+//	return gitlab.getUrls(id);
+//       });
+//     })
+//     .then((urls) => {
+//       return urls.map((url) => {
+//	return runGit(url);
+//       });
+//     });
+// };
 lazygit = () => {
   return gitlab.getGroups()
     .then((gids) => {
