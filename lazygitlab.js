@@ -7,8 +7,8 @@ const token     = args.chkToken();
 const dest      = args.chkDest();
 const host      = 'https://www.gitlab.com';
 const gitlabApi = axios.create({
-  baseURL: "https://www.gitlab.com",
-  headers: {'PRIVATE-TOKEN': "jvBukuh6y8xTd6MyLwFz"}
+  baseURL: host,
+  headers: {'PRIVATE-TOKEN': token}
 });
 
 runGit = (url) => {
@@ -22,7 +22,8 @@ runGit = (url) => {
 };
 
 getUrls = (id) => {
-  return gitlabApi.get(`/api/v4/groups/${id}/projects\?per_page\=999`)
+  let slug = `/api/v4/groups/${id}/projects\?per_page\=999`;
+  return gitlabApi.get(slug)
     .then((repos) => {
       return repos.data.map((r) => {
 	return r.ssh_url_to_repo;
@@ -31,26 +32,18 @@ getUrls = (id) => {
 };
 
 getGroups = () => {
-  if (args.group) {
-    return gitlabApi.get('/api/v4/groups\?per_page\=999')
-      .then((groups) => {
-	return groups.data.filter((group) => {
-	  return group.full_path.startsWith(args.group);
-	});
-      })
-      .then((groups) => {
-	return groups.map((group) => {
-	  return group.id;
-	});
+  let slug = `/api/v4/groups\?per_page\=999`;
+  return gitlabApi.get(slug)
+    .then((groups) => {
+      return groups.data.filter((group) => {
+	return group.full_path.startsWith(args.group);
       });
-  } else {
-    return gitlabApi.get('/api/v4/groups\?per_page\=999')
-      .then((groups) => {
-	return groups.data.map((group) => {
-	  return group.id;
-	});
+    })
+    .then((data) => {
+      return data.map((group) => {
+	return group.id;
       });
-  }
+    });
 };
 
 lazygit = () => {
