@@ -33,6 +33,7 @@ runGit = (url) => {
 //       });
 //     });
 // };
+
 lazygit = () => {
   return gitlab.getGroups()
     .then((gids) => {
