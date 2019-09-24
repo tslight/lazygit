@@ -13,7 +13,11 @@ runGit = (url) => {
     git.status(path);
     return;
   }
-  (fs.existsSync(path) ? git.pull(path) : git.clone(url, path));
+  if (args.fetch) {
+    (fs.existsSync(path) ? git.fetch(path) : git.clone(url, path));
+  } else {
+    (fs.existsSync(path) ? git.pull(path) : git.clone(url, path));
+  }
 };
 
 lazygit = () => {
