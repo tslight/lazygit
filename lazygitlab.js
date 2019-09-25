@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('./lib/gitlab').lazyGroups();
+require('./lib/gitlab').lazy();
