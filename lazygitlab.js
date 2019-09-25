@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('./lib/gitlab/lazy').lazy();
+require('./lib/gitlab/lzy').lazy();
