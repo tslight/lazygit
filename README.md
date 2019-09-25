@@ -14,7 +14,7 @@ value in `config.json`.
 
 ```javascript
 {
-  "dest": "/path/to/location/for/repos"
+  "dest": "/path/to/location/for/projects"
   "token" : "GITLAB_TOKEN"
 }
 ```
@@ -25,19 +25,21 @@ link` to install as CLI app called `lazygitlab`
 Alternatively you can pass command line arguments to overwrite the default
 configuration.
 
-You can also pass a the `--group` argument, and `lazygitlab` will only download
-the repositories under that group (recursively).
+You can also pass a the `--namespace` argument, and `lazygitlab` will only
+download the projects under that namespace (can be a group path or your
+username - for personal projects).
 
-The `--status` flag will run `git status` on the locally downloaded repos, so
-you can see what you've changed locally since you're last commit.
+The `--status` flag will run `git status` on the locally downloaded projects,
+so you can see what you've changed locally since you're last commit.
 
 ``` shell
 Options:
   --version          Show version number
+  --destination, -d  Destination directory to operate on
+  --fetch, -f        Run fetch --all, instead of pull
+  --namespace, -n    Namespace to download (group or user)
   --token, -t        Gitlab API token
-  --destination, -d  Destination directory
-  --group, -g        Group to download
+  --status, -s       View local project status
   --verbose, -v      Increase verbosity
-  --status, -s       View local status
   --help, -h         Show help
 ```
