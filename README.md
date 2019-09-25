@@ -1,16 +1,36 @@
 # SLACK OFF. BE A LAZY GIT.
 
-So far this only supports Gitlab, but hopefully it will support GitHub too
-soon...
+Run git commands or configuration on all projects or groups of an authenticated
+Gitlab user.
 
-Firstly you need to generate a Gitlab Personal Access Token from
+So far only Gitlab is supported and the git commands - `clone`, `pull`, `fetch`
+& `status`.
+
+**Coming soon** - GitHub support & wider array of commands and configuration...
+
+## INSTALLATION
+
+Clone the repo, run `npm install` in the project root, to download
+dependancies, and then `npm link` to install as a CLI app called `lazygitlab`.
+
+**Coming soon** - official npm package...
+
+## CONFIGURATION
+
+Copy `config.example.json` to `config.json` and edit to your tastes. It should
+be fairly self explantatory...
+
+### TOKENS
+
+Generate a Gitlab Personal Access Token from
 [here](https://gitlab.com/profile/personal_access_tokens).
 
-To authenicate to Gitlab copy `config.example.json` to `config.json` and add your
-Gitlab Personal Access Token.
+### DESTINATION
 
 To specify which directory you'd like to clone/update change the `destination`
 value in `config.json`.
+
+### EXAMPLE
 
 ```javascript
 {
@@ -19,27 +39,21 @@ value in `config.json`.
 }
 ```
 
-Then run `npm install` in the project root, to download dependancies, and `npm
-link` to install as CLI app called `lazygitlab`
-
 Alternatively you can pass command line arguments to overwrite the default
-configuration.
+configuration...
 
-You can also pass a the `--namespace` argument, and `lazygitlab` will only
-download the projects under that namespace (can be a group path or your
-username - for personal projects).
-
-The `--status` flag will run `git status` on the locally downloaded projects,
-so you can see what you've changed locally since you're last commit.
+## OPTIONS
 
 ``` shell
 Options:
   --version          Show version number
   --destination, -d  Destination directory to operate on
   --fetch, -f        Run fetch --all, instead of pull
+  --groups, -g       Act on groups rather than projects
+  --http, -h         Use http url to access projects
   --namespace, -n    Namespace to download (group or user)
-  --token, -t        Gitlab API token
   --status, -s       View local project status
+  --token, -t        Gitlab API token
   --verbose, -v      Increase verbosity
-  --help, -h         Show help
+  --help             Show help
 ```
