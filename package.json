@@ -17,7 +17,6 @@
   "dependencies": {
     "axios": "",
     "node-cmd": "",
-    "@iarna/toml": "",
     "yargs": ""
   }
 }
