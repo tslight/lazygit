@@ -47,13 +47,21 @@ configuration...
 ``` shell
 Options:
   --version          Show version number
+  --create, -c       Create a gitlab runner registering script
+  --file, -f         Destination file for gitlab runner script
   --destination, -d  Destination directory to operate on
-  --fetch, -f        Run fetch --all, instead of pull
-  --groups, -g       Act on groups rather than projects
-  --http, -h         Use http url to access projects
-  --namespace, -n    Namespace to download (group or user)
-  --status, -s       View local project status
+  --http             Use http url to access projects
+  --ssh              Use ssh url to access projects
+  --namespaces, -n   Namespace to query (group or user)
+  --projects, -p     Projects to query (group or user)
+  --groups, -g       Groups to query (group or user)
+  --run, -r          Git command to run
+  --show, -s         API resource to show
+  --order, -o        Field to order API resources by
+  --filter_key       Key to filter API resources by
+  --filter_value     Value to filter API resources by
+  --slack            Update Slack integration settings
   --token, -t        Gitlab API token
   --verbose, -v      Increase verbosity
-  --help             Show help
+  -h, --help         Show help
 ```
