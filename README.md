@@ -44,7 +44,7 @@ configuration...
 
 ## OPTIONS
 
-``` shell
+``` text
 Options:
   --version          Show version number
   --create, -c       Create a gitlab runner registering script
