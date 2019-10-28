@@ -1,4 +1,8 @@
-{
-  "dest": "/path/to/location/for/repos",
+"gitlab": {
+  "destination": "/path/to/location/for/repos",
+  "token": "GITLAB_TOKEN"
+}
+"github": {
+  "destination": "/path/to/location/for/repos",
   "token": "GITLAB_TOKEN"
 }
