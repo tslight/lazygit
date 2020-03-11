@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('./lib/github/scratch').init();
+require('./lib/github/lazy').init();
