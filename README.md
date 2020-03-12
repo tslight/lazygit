@@ -1,12 +1,12 @@
 # SLACK OFF. BE A LAZY GIT.
 
-Run git commands or configuration on all projects or groups of an authenticated
-Gitlab user.
+Run git commands or query api on all projects or groups of an authenticated
+GitLab or GitHub user.
 
-So far only Gitlab is supported and the git commands - `clone`, `pull`, `fetch`
-& `status`.
+So far only GitLab & GitHub are supported and the git commands - `clone`,
+`pull`, `fetch` & `status`.
 
-**Coming soon** - GitHub support & wider array of commands and configuration...
+**Coming soon** - A wider array of commands and configuration...
 
 ## INSTALLATION
 
@@ -34,8 +34,14 @@ value in `config.json`.
 
 ```javascript
 {
-  "dest": "/path/to/location/for/projects"
-  "token" : "GITLAB_TOKEN"
+  "github": {
+	"destination": "/path/to/location/for/github/repos",
+	"token": "GITHUB_TOKEN"
+  },
+  "gitlab": {
+	"destination": "/path/to/location/for/gitlab/projects",
+	"token": "GITLAB_TOKEN"
+  }
 }
 ```
 
@@ -44,24 +50,47 @@ configuration...
 
 ## OPTIONS
 
+`lazygitlab`:
+
 ``` text
-  --version           Show version number
-  --create, -c        Create a gitlab runner registering script
-  --file, -f          Destination file for gitlab runner script
-  --destination, -d   Destination directory to operate on
-  --http              Use http url to access projects
-  --ssh               Use ssh url to access projects
-  --namespaces, -n    Enter namespaces to operate on
-  --projects, -p      Enter projects to operate on
-  --groups, -g        Enter groups to operate on
-  --run, -r           Git command to run
-  --show, -s          API resources to show
-  --order, -o         Attribute to order API resources by
-  --attributes, -a    Only show these attributes of a resource
-  --filter_key, -K    Key to filter API resources by
-  --filter_value, -V  Value to filter API resources by
-  --slack             Update Slack integration settings
-  --token, -t         Gitlab API token
-  --verbose, -v       Increase verbosity
+  --version           Show version number                              [boolean]
+  --create, -c        Create a gitlab runner registering script         [string]
+  --file, -f          Destination file for gitlab runner script         [string]
+  --destination, -d   Destination directory to operate on               [string]
+  --http              Use http url to access projects                  [boolean]
+  --ssh               Use ssh url to access projects   [boolean] [default: true]
+  --namespaces, -n    Enter namespaces to operate on       [array] [default: ""]
+  --projects, -p      Enter projects to operate on                       [array]
+  --groups, -g        Enter groups to operate on                         [array]
+  --run, -r           Git command to run     [string] [default: "pull-or-clone"]
+  --show, -s          API resources to show                             [string]
+  --order, -o         Attribute to order API resources by               [string]
+  --attributes, -a    Only show these attributes of a resource           [array]
+  --filter_key, -K    Key to filter API resources by                    [string]
+  --filter_value, -V  Value to filter API resources by                  [string]
+  --token, -t         Gitlab API token                                  [string]
+  --verbose, -v       Increase verbosity                               [boolean]
   -h, --help          Show help
+  [boolean]
+```
+
+`lazygithub`:
+
+``` text
+  --version           Show version number                              [boolean]
+  --destination, -d   Destination directory to operate on               [string]
+  --http              Use http url to access projects                  [boolean]
+  --ssh               Use ssh url to access projects   [boolean] [default: true]
+  --projects, -p      Enter projects to operate on                       [array]
+  --run, -r           Git command to run     [string] [default: "pull-or-clone"]
+  --repo, -R          Repo to work with                                 [string]
+  --user, -u          Alternate GitHub user to work with                [string]
+  --show, -s          API resources to show                             [string]
+  --order, -o         Attribute to order API resources by               [string]
+  --attributes, -a    Only show these attributes of a resource           [array]
+  --filter_key, -K    Key to filter API resources by                    [string]
+  --filter_value, -V  Value to filter API resources by                  [string]
+  --token, -t         Github API token                                  [string]
+  --verbose, -v       Increase verbosity                               [boolean]
+  -h, --help          Show help                                        [boolean]
 ```
