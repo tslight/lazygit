@@ -94,3 +94,17 @@ configuration...
   --verbose, -v       Increase verbosity                               [boolean]
   -h, --help          Show help                                        [boolean]
 ```
+
+## EXAMPLES
+
+**Want to see the job logs of your the latest failed GitLab CI job?**
+
+`lazygitlab --projects your-project-name --show latest_failed_job` or, if you
+don't like typing - `lgl -p project-name -s lfj`
+
+Pipe this to `less -Rr` for maximum win: `lgl -p lazygit -s lfj | less -Rr`. Bosh.
+
+**How about all of the pipeline schedules of a GitLab group ordered by when they
+are next going to run at?**
+
+`lazygitlab --namespace group/subgroup --show schedules` or `lgl -n group/subgroup -s ps`
