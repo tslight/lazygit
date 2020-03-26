@@ -108,3 +108,5 @@ Pipe this to `less -Rr` for maximum win: `lgl -p lazygit -s lfj | less -Rr`. Bos
 are next going to run at?**
 
 `lazygitlab --namespace group/subgroup --show schedules` or `lgl -n group/subgroup -s ps`
+
+Pipe this to `jq -rc` for more colorful/terser output.
