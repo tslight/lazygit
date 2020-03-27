@@ -13,6 +13,8 @@
   },
   "preferGlobal": true,
   "bin": {
+    "lgl": "./lazygitlab.js",
+    "lgh": "./lazygithub.js",
     "lazygitlab": "./lazygitlab.js",
     "lazygithub": "./lazygithub.js"
   },
