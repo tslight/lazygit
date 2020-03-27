@@ -107,7 +107,6 @@ Pipe this to `less -Rr` for maximum win: `lgl -p lazygit -s lfj | less -Rr`. Bos
 **How about all of the pipeline schedules of a GitLab group ordered by when they
 are next going to run at?**
 
-`lazygitlab --namespace group/subgroup --show schedules` or `lgl -n
-group/subgroup -s ps`
+`lazygitlab --namespace group/subgroup --show schedules` or `lgl -n group/subgroup -s ps`
 
--Pipe this to `jq -rc` for more colorful/terser output.
+Pipe this to `jq -rc` for more colorful/terser output.
